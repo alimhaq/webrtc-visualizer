@@ -77,6 +77,7 @@ function startWebRTC(isOfferer) {
   }
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     localVideo.srcObject = stream;
+    console.log(stream);
     pc.addStream(stream);
   }).catch(error => console.error(error));
 
@@ -119,5 +120,3 @@ function localDescCreated(desc) {
     error => console.error(error)
   );
 }
-
-console.log(localVideo);
