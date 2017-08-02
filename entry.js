@@ -119,3 +119,5 @@ function localDescCreated(desc) {
     error => console.error(error)
   );
 }
+
+console.log(localVideo.audioTracks);
