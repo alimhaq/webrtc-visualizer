@@ -73,7 +73,7 @@ function startWebRTC(isOfferer) {
 
   const constraints = {
     audio: true,
-    video: true
+    video: false
   }
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     localVideo.srcObject = stream;
