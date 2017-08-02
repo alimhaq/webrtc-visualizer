@@ -1,0 +1,23 @@
+{
+  "name": "webrtc",
+  "version": "1.0.0",
+  "description": "### Background",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alimhaq/webrtc-visualizer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alimhaq/webrtc-visualizer/issues"
+  },
+  "homepage": "https://github.com/alimhaq/webrtc-visualizer#readme",
+  "dependencies": {
+    "simple-peer": "^8.1.1",
+    "webpack": "^3.4.1"
+  }
+}
