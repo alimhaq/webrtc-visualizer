@@ -77,7 +77,7 @@ function startWebRTC(isOfferer) {
   }
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     localVideo.srcObject = stream;
-    console.log(stream);
+    console.log(stream.getAudioTracks);
     pc.addStream(stream);
   }).catch(error => console.error(error));
 
