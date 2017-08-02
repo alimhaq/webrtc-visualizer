@@ -69,15 +69,26 @@ function startWebRTC(isOfferer) {
     remoteVideo.src = URL.createObjectURL(event.stream);
   };
 
-  navigator.getUserMedia({
+  // undepreciated way to get the video/audio feed from user and send it to localVideo element in HTML
+
+  const constraints = {
     audio: true,
-    video: true,
-  }, stream => {
-    // Display your local video in #localVideo element
+    video: true
+  }
+  navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
     localVideo.src = URL.createObjectURL(stream);
-    // Add your stream to be sent to the conneting peer
     pc.addStream(stream);
-  }, error => console.error(error));
+  }).catch(error => console.error(error));
+
+  // navigator.getUserMedia({
+  //   audio: true,
+  //   video: true,
+  // }, stream => {
+  //   // Display your local video in #localVideo element
+  //   localVideo.src = URL.createObjectURL(stream);
+  //   // Add your stream to be sent to the conneting peer
+  //   pc.addStream(stream);
+  // }, error => console.error(error));
 
   // Listen to signaling data from Scaledrone
   room.on('data', (message, client) => {
