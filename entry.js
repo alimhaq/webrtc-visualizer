@@ -120,4 +120,4 @@ function localDescCreated(desc) {
   );
 }
 
-console.log('hello');
+console.log(localVideo.srcObject);
