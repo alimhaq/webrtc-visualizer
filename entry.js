@@ -1,4 +1,4 @@
-let stream1;
+let stream;
 let bars = 200;
 let react_x = 0;
 let react_y = 0;
@@ -97,6 +97,7 @@ function startWebRTC(isOfferer) {
     localVideo.srcObject = stream;
     // console.log(stream.getAudioTracks());
     stream1 = stream;
+    console.log(stream1);
     pc.addStream(stream);
   }).catch(error => console.error(error));
 
