@@ -172,7 +172,7 @@ function frameLooper() {
 	resize_canvas();
 				
 	var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
-	grd.addColorStop(0, "rgba(187, 37, 17, 1)");
+	grd.addColorStop(0, "rgba(126, 25, 12, 1)");
 	grd.addColorStop(1, "rgba(219, 44, 20, 1)");
 
 	ctx.fillStyle = grd;
