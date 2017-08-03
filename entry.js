@@ -18,6 +18,7 @@ let bar_height;
 let canvas = document.getElementById("visualizer");
 let ctx = canvas.getContext("2d");
 let analyser;
+let fbc_array;
 
 // Generate random room name if necessary
 if (!location.hash) {
@@ -154,7 +155,7 @@ function runVisualizer() {
 	source.connect(analyser);
 	analyser.connect(audioCtx.destination);
 	
-	let fbc_array = new Uint8Array(analyser.frequencyBinCount);
+	fbc_array = new Uint8Array(analyser.frequencyBinCount);
 	
 	frameLooper();
 }
