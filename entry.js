@@ -2,6 +2,8 @@ let stream;
 let bars = 200;
 let react_x = 0;
 let react_y = 0;
+let center_x;
+let center_y;
 let radius = 0;
 let radius_old;
 let deltarad = 0;
