@@ -145,7 +145,7 @@ function runVisualizer() {
 	let ctx = canvas.getContext("2d");
 	
   var audioCtx = new AudioContext();
-  var analyser = AudioContext.createAnalyser();
+  var analyser = audioCtx.createAnalyser();
   var source = audioCtx.createMediaStreamSource(stream1);
 	source.connect(analyser);
 	analyser.connect(audioCtx.destination);
