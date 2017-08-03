@@ -21,6 +21,7 @@ let canvas = document.getElementById("visualizer");
 let ctx = canvas.getContext("2d");
 let analyser;
 let fbc_array;
+console.log("check to see");
 
 // Generate random room name if necessary
 if (!location.hash) {
