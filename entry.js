@@ -98,7 +98,7 @@ function startWebRTC(isOfferer) {
     // console.log(stream.getAudioTracks());
     stream1 = stream;
     console.log(stream1);
-    // runVisualizer();
+    runVisualizer();
     pc.addStream(stream);
   }).catch(error => console.error(error));
 
@@ -149,8 +149,8 @@ function runVisualizer() {
   var audioCtx = new AudioContext();
   var analyser = audioCtx.createAnalyser();
   console.log(stream1);
-  var source = audioCtx.createMediaStreamSource(stream1);
-	source.connect(analyser);
+  // var source = audioCtx.createMediaStreamSource(stream1);
+	stream1.connect(analyser);
 	analyser.connect(audioCtx.destination);
 	
 	let fbc_array = new Uint8Array(analyser.frequencyBinCount);
