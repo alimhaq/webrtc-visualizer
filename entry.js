@@ -128,10 +128,9 @@ function startWebRTC(isOfferer) {
     } else if (message.candidate) {
       // Add the new ICE candidate to our connections remote description
       pc.addIceCandidate(new RTCIceCandidate(message.candidate));
+      runVisualizer();
     }
   });
-
-  runVisualizer();
 }
 
 function localDescCreated(desc) {
