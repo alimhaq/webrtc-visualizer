@@ -88,19 +88,19 @@ function startWebRTC(isOfferer) {
     }
   }
 
-  // When a remote stream arrives display it in the #remoteVideo element
+  // When a remote stream arrives display it in the #remoteAudio element
   pc.onaddstream = event => {
-    remoteVideo.src = URL.createObjectURL(event.stream);
+    remoteAudio.src = URL.createObjectURL(event.stream);
   };
 
-  // undepreciated way to get the video/audio feed from user and send it to localVideo element in HTML
+  // undepreciated way to get the video/audio feed from user and send it to localAudio element in HTML
 
   const constraints = {
     audio: true,
     video: false
   }
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-    localVideo.srcObject = stream;
+    localAudio.srcObject = stream;
     // console.log(stream.getAudioTracks());
     stream1 = stream;
     console.log(stream1);
@@ -112,8 +112,8 @@ function startWebRTC(isOfferer) {
   //   audio: true,
   //   video: true,
   // }, stream => {
-  //   // Display your local video in #localVideo element
-  //   localVideo.src = URL.createObjectURL(stream);
+  //   // Display your local video in #localAudio element
+  //   localAudio.src = URL.createObjectURL(stream);
   //   // Add your stream to be sent to the conneting peer
   //   pc.addStream(stream);
   // }, error => console.error(error));
