@@ -143,7 +143,7 @@ function localDescCreated(desc) {
 }
 
 function runVisualizer() {
-	let canvas = document.getElementById("visualizer");
+	var canvas = document.getElementById("visualizer");
 	let ctx = canvas.getContext("2d");
 	
   var audioCtx = new AudioContext();
