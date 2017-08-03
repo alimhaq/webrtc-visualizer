@@ -15,6 +15,7 @@ let bar_x_term;
 let bar_y_term;
 let bar_width;
 let bar_height;
+let canvas = document.getElementById("visualizer");
 
 // Generate random room name if necessary
 if (!location.hash) {
@@ -143,7 +144,6 @@ function localDescCreated(desc) {
 }
 
 function runVisualizer() {
-	var canvas = document.getElementById("visualizer");
 	let ctx = canvas.getContext("2d");
 	
   var audioCtx = new AudioContext();
