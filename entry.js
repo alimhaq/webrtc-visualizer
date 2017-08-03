@@ -146,6 +146,7 @@ function runVisualizer() {
 	
   var audioCtx = new AudioContext();
   var analyser = audioCtx.createAnalyser();
+  console.log(stream1);
   var source = audioCtx.createMediaStreamSource(stream1);
 	source.connect(analyser);
 	analyser.connect(audioCtx.destination);
