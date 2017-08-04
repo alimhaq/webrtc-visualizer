@@ -100,7 +100,6 @@ function startWebRTC(isOfferer) {
   // When a remote stream arrives display it in the #remoteAudio element
   pc.onaddstream = event => {
     remoteAudio.src = URL.createObjectURL(event.stream);
-    runVisualizer();
   };
 
   // undepreciated way to get the video/audio feed from user and send it to localAudio element in HTML
@@ -114,7 +113,7 @@ function startWebRTC(isOfferer) {
     // console.log(stream.getAudioTracks());
     stream1 = stream;
     console.log(stream1);
-    
+    runVisualizer();
     pc.addStream(stream);
   }).catch(error => console.error(error));
 
