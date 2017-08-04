@@ -1,67 +1,58 @@
-## WebRTC Audio Visualizer
+# WebRTC Visualizer
 
-### Background
+[WebRTC Visualizer live][webRTCvisualizer]
 
-Web Real-Time Communication (WebRTC) is a set of protocols & APIs that allows the creation of a peer-to-peer connection between two browsers and allows for the transmission of information between those peers. WebRTC is the technology responsible for some of the most widely used apps today, including Google Hangouts, Facebook Messenger, and Snapchat.
+WebRTC visualizer is a completely front-end application designed using vanilla JavaScript that converts the audio from two connected peers to visual outputs, allowing for a stylized visualized interplay between them, and as such providing a more interactive experience for WebRTC voice communication. While the application itself is completely frontend, it does involve the use of a signalling server (provided by ScaleDrone) and a TURN server (provided by Google).
 
-The goal of this project is to make a visualizer that converts the audio from both peers to visual outputs, allowing for a visualized interplay between them, and as such providing a more interactive experience for WebRTC voice communication.
+The motivation behind using WebRTC is because of it's growing use in industry; popular apps such as Google Hangouts, Facebook Messenger, Snapchat, etc. all make use of WebRTC. With the recent addition of WebRTC in Safari 11.0, it seemed a desirable technology to become familiar with.
 
-### Functionality & MVP  
+Please see the [docs][docs] folder for design documentation.
 
-Using this WebRTC Audio Visualizer, users will be able to:
+## Features & Implementation
 
-- [ ] Connect to a peer through the Chrome web browser using WebRTC
-- [ ] Engage in peer-to-peer voice chat
-- [ ] Observe visual output from both single audio as well as the interplay of both audio
-- [ ] Adjust the volume, visual output, and other misc settings
+### WebRTC p2p Voice Chat
 
-In addition, this project will include:
+The main meat of the application involves the use of WebRTC to initiate a p2p voice chat. This required much research into how WebRTC works–the original goal was to utilize a library such as `SimplePeer` that made WebRTC connections easy, but it seemed like it was causing more issues than it solved due to its inflexibility. Thus, vanilla WebRTC was used along with a signalling server and TURN server. A signalling server is required in order to get the two peers to find each other; a TURN server is necessary to bypass firewall and other restrictions that prevent two peers from being connected directly through WebRTC.
 
-- [ ] An About modal describing the purpose and a brief overview of the application
-- [ ] A production Readme
+The following code snippet showcases opening a room in the Scaledrone server that takes as argument the roomName, essentially setting up the signalling aspect by allowing two peers to find each other through a common roomName in the Scaledrone server
 
-### Wireframes
+```javascript
+drone.on('open', error => {
+  if (error) {
+    return console.error(error);
+  }
+  room = drone.subscribe(roomName);
+  room.on('open', error => {
+    console.log('Open');
+    if (error) {
+      console.error(error);
+    }
+  });
+```
 
-The main meat of the app will consist of a screen with the visualizer, visual controls, volume controls, and a footer that contains nav links to my Github and Linkedin. Visual controls will allow for some malleability regarding what visuals are displayed per the audio input from both users. In addition, there must be some avenue by which the users find each other; this may be implemented with a screen shown before where users have to input the same room name in order to find each other.
+### Audio to Visual Conversion using Canvas
 
-![wireframes](images/entry.png)
+Converting the audio from the WebRTC stream to a visual output proved to be a bit of a task as well; in order to do this in JS, one needs to create an AudioContext object and then create an analyser object as well as a source object from that. This proved problematic because creating a mediaStreamSource object ended up triggering a function in the code earlier, which caused the app to mistakenly think the second peer connecting was the visual output. This bug is still in the process of being resolved.
 
-### Architecture and Technologies
+```javascript
+function runVisualizer() {
+  var audioCtx = new AudioContext();
+  analyser = audioCtx.createAnalyser();
+  var source = audioCtx.createMediaStreamSource(stream1);
+	source.connect(analyser);
+	analyser.connect(audioCtx.destination);
+	fbc_array = new Uint8Array(analyser.frequencyBinCount);
+	frameLooper();
+}
+```
 
-This project will be implemented with the following technologies:
+## Future Directions
 
-- Vanilla JavaScript and `jquery` for the overall structure of the app,
-- `Easel.js` with `HTML5 Canvas` for DOM manipulation and rendering of the visualizer,
-- `SimplePeer` as the WebRTC library (the vanilla WebRTC API is quite complicated, and SimplePeer is sufficiently low-level to suit the purpose of the app),
-- Webpack to bundle and serve up the various scripts.
+### Additional Settings
+Settings to change the visuals displayed to the user. Additionally, another set of settings could be added to change the voice that was sent to each peer, and as a result, modify the visuals as well.
 
-### Implementation Timeline
+### Tutorial/Demo Page
+Because the app requires two different computers to really utilize it, it might be helpful to have a demo page upfront with a video to remedy this problem. Another alternative is to mention that one could use the demo by opening up the app in two separate web pages, but the effect is more interesting if two different peers are connected.
 
-**Day 1**: Setup all necessary Node modules, including getting webpack up and running and `Easel.js` and `SimplePeer` installed.  Create `webpack.config.js` as well as `package.json`.  Write a basic entry file. Learn how to utilize `SimplePeer` and `Easel.js`. Goals for the day:
-
-- Get a green bundle with `webpack`
-- Learn enough `Easel.js` to render an object to the `Canvas` element
-- Familiarize myself with the essentials of WebRTC and how to utilize `SimplePeer`
-
-**Day 2**: This day should be completely dedicated to setting up an audio WebRTC connection between two web browsers through the `SimplePeer` library. This will require the use of a server that will allow for the browsers to find each other.
-
-- Understand how `SimplePeer` works to allow for a peer-to-peer connection to be made through WebRTC
-- Get a running app up of a barebones WebRTC connection made through the library
-- Set up a lobby system to find peers (or through a designated room)
-
-**Day 3**: Figure out how to utilize `Easel.js` and the `HTML5 Canvas` to render to the DOM a visualization of the audio input from the WebRTC connection
-
-- Have a functional visual on the `Canvas` frontend that correctly handles translation of the audio input from the WebRTC connection to a visual output through the data of the sound itself
-
-**Day 4**: Add the settings, volume controls, visual controls, etc. Polish the front end and make sure everything is working well.
-
-- Create controls for altering the visual output of the application
-- Have a styled `Canvas`, polished UX
-
-### Bonus features
-
-This rudimentary visualizer sets the stage for bigger and more interesting apps to be built on top of it.
-
-- [ ] Add more options for interactions between peers
-- [ ] Add a text chatroom to communicate between peers
-- [ ] Add user profiles to more easily communicate and find other users
+[webRTCvisualizer]: https://alimhaq.github.io/webrtc-visualizer
+[docs]: ./docs

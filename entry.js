@@ -117,16 +117,6 @@ function startWebRTC(isOfferer) {
     pc.addStream(stream);
   }).catch(error => console.error(error));
 
-  // navigator.getUserMedia({
-  //   audio: true,
-  //   video: true,
-  // }, stream => {
-  //   // Display your local video in #localAudio element
-  //   localAudio.src = URL.createObjectURL(stream);
-  //   // Add your stream to be sent to the conneting peer
-  //   pc.addStream(stream);
-  // }, error => console.error(error));
-
   // Listen to signaling data from Scaledrone
   room.on('data', (message, client) => {
     console.log('CLIENT', client);
