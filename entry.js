@@ -1,3 +1,5 @@
+// define variables in highest level of scope so variables are accessible to all functions
+
 let stream;
 let bars = 200;
 let react_x = 0;
@@ -21,18 +23,21 @@ let canvas = document.getElementById("visualizer");
 let ctx = canvas.getContext("2d");
 let analyser;
 let fbc_array;
-console.log("check to see");
 
-// Generate random room name if necessary
+// Generate random room name as hash from URL to be shared with a peer;
+// if there is already a location.hash, then that means the second peer
+// is connecting to the visualizer
 if (!location.hash) {
   location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 const roomHash = location.hash.substring(1);
 
-// Create ScaleDrone object to handle signalling
+// Create ScaleDrone object to handle signalling aspect of WebRTC
 const drone = new ScaleDrone('rvrxRvWFRD1CikaM');
 // Room name needs to be prefixed with 'observable-'
 const roomName = 'observable-' + roomHash;
+
+// Utilize Google stun server to bypass firewall(?)
 const configuration = {
   iceServers: [{
     url: 'stun:stun.l.google.com:19302'
@@ -42,6 +47,9 @@ const configuration = {
 let room;
 let pc;
 
+// Open a room in the Scaledrone server that takes as argument the roomName
+// This essentially sets up the signalling aspect by allowing two peers to
+// find each other through a common roomName in the Scaledrone server
 drone.on('open', error => {
   if (error) {
     return console.error(error);
@@ -54,7 +62,7 @@ drone.on('open', error => {
     }
   });
   // We're connected to the room and received an array of 'members'
-  // connected to the room (including us). Signaling server is ready.
+  // that are connected to the room (including us): the Signaling server is now ready.
   room.on('members', members => {
     console.log('MEMBERS', members);
     // If we are the second user to connect to the room we will be creating the offer
@@ -135,7 +143,7 @@ function startWebRTC(isOfferer) {
         }
       }, error => console.error(error));
     } else if (message.candidate) {
-      // Add the new ICE candidate to our connections remote description
+      // Add the new ICE candidate to our connections remote description  
       pc.addIceCandidate(new RTCIceCandidate(message.candidate));
     }
   });
