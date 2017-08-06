@@ -113,7 +113,7 @@ function startWebRTC(isOfferer) {
     // console.log(stream.getAudioTracks());
     stream1 = stream;
     console.log(stream1);
-    runVisualizer();
+    // runVisualizer();
     pc.addStream(stream);
   }).catch(error => console.error(error));
 
