@@ -14,7 +14,7 @@ Please see the [docs][docs] folder for design documentation.
 
 The main meat of the application involves the use of WebRTC to initiate a p2p voice chat. This required much research into how WebRTC works–the original goal was to utilize a library such as `SimplePeer` that made WebRTC connections easy, but it seemed like it was causing more issues than it solved due to its inflexibility. Thus, vanilla WebRTC was used along with a signalling server and TURN server. A signalling server is required in order to get the two peers to find each other; a TURN server is necessary to bypass firewall and other restrictions that prevent two peers from being connected directly through WebRTC.
 
-The following code snippet showcases opening a room in the Scaledrone server that takes as argument the roomName, essentially setting up the signalling aspect by allowing two peers to find each other through a common roomName in the Scaledrone server
+The following code snippet showcases opening a room in the Scaledrone server that takes as argument the roomName, essentially setting up the signalling aspect by allowing two peers to find each other through a common roomName in the Scaledrone server.
 
 ```javascript
 drone.on('open', error => {
