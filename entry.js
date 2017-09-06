@@ -101,7 +101,7 @@ function startWebRTC(isOfferer) {
   pc.onaddstream = event => {
     remoteAudio.srcObject = event.stream;
     stream2 = event.stream;
-    // runVisualizer();
+    runVisualizer();
   };
 
   // undepreciated way to get the video/audio feed from user and send it to localAudio element in HTML
@@ -172,7 +172,7 @@ function runVisualizer() {
   source1.connect(merger);
   source2.connect(merger);
 	merger.connect(analyser);
-	analyser.connect(audioCtx.destination);
+	// analyser.connect(audioCtx.destination);
 	
 	fbc_array = new Uint8Array(analyser.frequencyBinCount);
 	
