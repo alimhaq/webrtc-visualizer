@@ -1,6 +1,6 @@
 // define variables in highest level of scope so variables are accessible to all functions
 
-let stream;
+var stream;
 let bars = 200;
 let react_x = 0;
 let react_y = 0;
