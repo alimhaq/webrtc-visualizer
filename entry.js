@@ -1,6 +1,6 @@
 // define variables in highest level of scope so variables are accessible to all functions
 
-let stream1;
+let stream;
 let bars = 200;
 let react_x = 0;
 let react_y = 0;
@@ -99,8 +99,7 @@ function startWebRTC(isOfferer) {
 
   // When a remote stream arrives display it in the #remoteAudio element
   pc.onaddstream = event => {
-    remoteStream = URL.createObjectURL(event.stream)
-    remoteAudio.src = remoteStream;
+    remoteAudio.src = URL.createObjectURL(event.stream);
     runVisualizer();
   };
 
@@ -163,14 +162,9 @@ function runVisualizer() {
 	
   var audioCtx = new AudioContext();
   analyser = audioCtx.createAnalyser();
-  // console.log(stream1);
-  var localSource = audioCtx.createMediaStreamSource(stream1);
-  var remoteSource = audioCtx.createMediaStreamSource(remoteStream);
-  var merger = audioCtx.createChannelMerger(2);
-  localSource.connect(merger);
-  remoteSource.connect(merger);
-
-	merger.connect(analyser);
+  console.log(stream1);
+  var source = audioCtx.createMediaStreamSource(stream1);
+	source.connect(analyser);
 	analyser.connect(audioCtx.destination);
 	
 	fbc_array = new Uint8Array(analyser.frequencyBinCount);
