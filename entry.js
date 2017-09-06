@@ -23,11 +23,6 @@ let canvas = document.getElementById("visualizer");
 let ctx = canvas.getContext("2d");
 let analyser;
 let fbc_array;
-var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
-grd.addColorStop(0, "rgba(29, 67, 80, 1)");
-grd.addColorStop(1, "rgba(164, 57, 49, 1)");
-
-ctx.fillStyle = grd;
 
 // Generate random room name as hash from URL to be shared with a peer;
 // if there is already a location.hash, then that means the second peer
@@ -192,6 +187,11 @@ function resize_canvas() {
 function frameLooper() {
 	resize_canvas();
 				
+	var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
+	grd.addColorStop(0, "rgba(29, 67, 80, 1)");
+	grd.addColorStop(1, "rgba(164, 57, 49, 1)");
+
+	ctx.fillStyle = grd;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	
 	ctx.fillStyle = "rgba(255, 255, 255, " + (intensity * 0.0000125 - 0.4) + ")";
