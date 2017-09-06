@@ -114,7 +114,7 @@ function startWebRTC(isOfferer) {
     localAudio.srcObject = stream;
     // console.log(stream.getAudioTracks());
     stream1 = stream;
-    // console.log(stream1);
+    console.log(stream1);
     // runVisualizer();
     pc.addStream(stream);
   }).catch(error => console.error(error));
@@ -163,7 +163,7 @@ function runVisualizer() {
 	
   var audioCtx = new AudioContext();
   analyser = audioCtx.createAnalyser();
-  console.log(stream1);
+  // console.log(stream1);
   var localSource = audioCtx.createMediaStreamSource(stream1);
   var remoteSource = audioCtx.createMediaStreamSource(remoteStream);
   var merger = audioCtx.createChannelMerger(2);
