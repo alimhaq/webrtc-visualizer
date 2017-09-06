@@ -160,7 +160,8 @@ function localDescCreated(desc) {
 }
 
 function runVisualizer() {
-	
+	var elem = document.getElementById('instruct');
+  elem.parentNode.removeChild(elem);
   var audioCtx = new AudioContext();
   analyser = audioCtx.createAnalyser();
   console.log(stream1);
