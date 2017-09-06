@@ -99,7 +99,8 @@ function startWebRTC(isOfferer) {
 
   // When a remote stream arrives display it in the #remoteAudio element
   pc.onaddstream = event => {
-    remoteAudio.src = URL.createObjectURL(event.stream);
+    stream2 = URL.createObjectURL(event.stream);
+    remoteAudio.src = stream2;
     runVisualizer();
   };
 
@@ -163,6 +164,7 @@ function runVisualizer() {
   var audioCtx = new AudioContext();
   analyser = audioCtx.createAnalyser();
   console.log(stream1);
+  console.log(stream2);
   var source = audioCtx.createMediaStreamSource(stream1);
 	source.connect(analyser);
 	analyser.connect(audioCtx.destination);
