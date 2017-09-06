@@ -165,8 +165,12 @@ function runVisualizer() {
   analyser = audioCtx.createAnalyser();
   console.log(stream1);
   console.log(stream2);
-  var source = audioCtx.createMediaStreamSource(stream1);
-	source.connect(analyser);
+  var source1 = audioCtx.createMediaStreamSource(stream1);
+  var source2 = audioCtx.createMediaStreamSource(stream2);
+  var merger = audioCtx.createChannelMerger(2);
+  source1.connect(merger);
+  source2.connect(merger);
+	merger.connect(analyser);
 	analyser.connect(audioCtx.destination);
 	
 	fbc_array = new Uint8Array(analyser.frequencyBinCount);
