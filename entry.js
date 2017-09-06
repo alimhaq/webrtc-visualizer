@@ -99,7 +99,8 @@ function startWebRTC(isOfferer) {
 
   // When a remote stream arrives display it in the #remoteAudio element
   pc.onaddstream = event => {
-    remoteAudio.src = URL.createObjectURL(event.stream);
+    remoteStream = URL.createObjectURL(event.stream)
+    remoteAudio.src = remoteStream;
     runVisualizer();
   };
 
@@ -162,9 +163,14 @@ function runVisualizer() {
 	
   var audioCtx = new AudioContext();
   analyser = audioCtx.createAnalyser();
-  console.log(stream1);
-  var source = audioCtx.createMediaStreamSource(stream1);
-	source.connect(analyser);
+  console.log(stream);
+  var localSource = audioCtx.createMediaStreamSource(stream);
+  var remoteSource = audioCtx.createMediaStreamSource(remoteStream);
+  var merger = audioCtx.createChannelMerger(2);
+  localSource.connect(merger);
+  remoteSource.connect(merger);
+
+	merger.connect(analyser);
 	analyser.connect(audioCtx.destination);
 	
 	fbc_array = new Uint8Array(analyser.frequencyBinCount);
