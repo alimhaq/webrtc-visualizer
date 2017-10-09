@@ -5,11 +5,9 @@ var modal = document.getElementById('myModal');
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-// window.onload = function() {
-//     if (!location.hash) {
-//       modal.style.display = "block";
-//     }
-// }
+function loadModal() {
+    modal.style.display = "block";
+}
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -54,7 +52,7 @@ let fbc_array;
 // is connecting to the visualizer
 if (!location.hash) {
   location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
-  modal.style.display = "block";
+  loadModal();
 }
 const roomHash = location.hash.substring(1);
 
