@@ -5,7 +5,7 @@ var modal = document.getElementById('myModal');
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-document.getElementById('instruct').onload = function() {
+window.onload = function() {
     modal.style.display = "block";
 }
 
