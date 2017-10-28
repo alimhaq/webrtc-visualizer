@@ -35,11 +35,13 @@
     /* The Modal (background) */
   .modal {
       display: inline-block;
-      position: center; /* Stay in place */
+      /* position: center; Stay in place */
       z-index: 1; /* Sit on top */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       /* padding-top: 100px; Location of the box */
-      left: 0;
-      top: 0;
       width: auto; /* Full width */
       height: auto; /* Full height */
       overflow: auto; /* Enable scroll if needed */
