@@ -21,7 +21,7 @@ window.onclick = function(event) {
     }
 }
 
-// define variables in highest level of scope so variables are accessible to all functions
+// define variables 
 
 let stream;
 let bars = 200;
