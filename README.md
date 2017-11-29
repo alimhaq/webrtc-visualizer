@@ -32,7 +32,7 @@ drone.on('open', error => {
 
 ### Audio to Visual Conversion using Canvas
 
-Converting the audio from the WebRTC stream to a visual output proved to be a bit of a task as well; in order to do this in JS, one needs to create an AudioContext object and then create an analyser object as well as a source object from that. This proved problematic because creating a mediaStreamSource object ended up triggering a function in the code earlier, which caused the app to mistakenly think the second peer connecting was the visual output. This bug is still in the process of being resolved.
+Converting the audio from the WebRTC stream to a visual output proved to be a bit of a task as well; in order to do this in JS, one needs to create an AudioContext object and then create an analyser object as well as a source object from that. This proved problematic because creating a mediaStreamSource object ended up triggering a function in the code earlier, which caused the app to mistakenly think the second peer connecting was the visual output. In order to get around this, the runVisualizer function has to be called after the second stream is established.
 
 ```javascript
 function runVisualizer() {
