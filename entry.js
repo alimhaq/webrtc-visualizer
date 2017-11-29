@@ -21,31 +21,9 @@ window.onclick = function(event) {
     }
 }
 
-// define variables 
+// define the stream
 
 let stream;
-let bars = 200;
-let react_x = 0;
-let react_y = 0;
-let center_x;
-let center_y;
-let radius = 0;
-let radius_old;
-let deltarad = 0;
-let shockwave = 0;
-let rot = 0;
-let intensity = 0;
-let rads;
-let bar_x;
-let bar_y;
-let bar_x_term;
-let bar_y_term;
-let bar_width;
-let bar_height;
-let canvas = document.getElementById("visualizer");
-let ctx = canvas.getContext("2d");
-let analyser;
-let fbc_array;
 
 // Generate random room name as hash from URL to be shared with a peer;
 // if there is already a location.hash, then that means the second peer
@@ -163,7 +141,7 @@ function startWebRTC(isOfferer) {
     if (message.sdp) {
       // This is called after receiving an offer or answer from another peer
       pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
-        // When receiving an offer lets answer it
+        // When receiving an offer answer it
         if (pc.remoteDescription.type === 'offer') {
           pc.createAnswer(localDescCreated, error => console.error(error));
         }
@@ -202,6 +180,31 @@ function runVisualizer() {
 	
 	frameLooper();
 }
+
+// Visualizer Variable Initialization
+
+let bars = 200;
+let react_x = 0;
+let react_y = 0;
+let center_x;
+let center_y;
+let radius = 0;
+let radius_old;
+let deltarad = 0;
+let shockwave = 0;
+let rot = 0;
+let intensity = 0;
+let rads;
+let bar_x;
+let bar_y;
+let bar_x_term;
+let bar_y_term;
+let bar_width;
+let bar_height;
+let canvas = document.getElementById("visualizer");
+let ctx = canvas.getContext("2d");
+let analyser;
+let fbc_array;
 
 function resize_canvas() {
       canvas.width  = window.innerWidth;
